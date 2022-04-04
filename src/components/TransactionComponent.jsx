@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const TransactionComponent = ({ transactions }) => {
   const [searchItem, setSearchItem] = useState("");
@@ -14,15 +14,16 @@ const TransactionComponent = ({ transactions }) => {
     );
     setFilteredItem(filter);
   };
+  
+  // useEffect(() => {
+  //   filterTransaction(searchItem);
+  // }, [transactions]);
 
   const changeHandler = (e) => {
     setSearchItem(e.target.value);
     filterTransaction(e.target.value);
   };
 
-  useEffect(() => {
-    filterTransaction(searchItem);
-  }, [transactions]);
 
   if (transactions.length === 0) return <p className="ptag">No transaction is added yet! 💬</p>;
 

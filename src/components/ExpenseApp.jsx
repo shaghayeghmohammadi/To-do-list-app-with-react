@@ -16,7 +16,7 @@ const ExpenseApp = () => {
   useEffect(() => {
     let inc = 0;
     let exp = 0;
-    transactions.map((t) => {
+    transactions.forEach((t) => {
       t.theType === "expense"
         ? (exp = exp + parseFloat(t.amount))
         : (inc = inc + parseFloat(t.amount));
@@ -33,7 +33,7 @@ const ExpenseApp = () => {
         expense={expense}
         addTransaction={addTransaction}
       />
-      <TransactionComponent transactions={transactions}  />
+      <TransactionComponent transactions={transactions} />
     </section>
   );
 };
