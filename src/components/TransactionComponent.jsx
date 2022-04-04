@@ -1,31 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TransactionComponent = ({ transactions }) => {
   const [searchItem, setSearchItem] = useState("");
   const [filteredItem, setFilteredItem] = useState(transactions);
 
-  const filterTransaction = (search) => {
-    if (!search || search === "") {
-      setFilteredItem(transactions);
-      return;
-    }
-    const filter = transactions.filter((t) =>
-      t.desc.toLowerCase().includes(search.toLowerCase())
-    );
-    setFilteredItem(filter);
-  };
-  
-  // useEffect(() => {
-  //   filterTransaction(searchItem);
-  // }, [transactions]);
+  useEffect(() => {
+    const filterTransaction = (search) => {
+      if (!search || search === "") {
+        setFilteredItem(transactions);
+        return;
+      }
+      const filter = transactions.filter((t) =>
+        t.desc.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredItem(filter);
+    };
+    filterTransaction();
+  }, [transactions]);
 
   const changeHandler = (e) => {
     setSearchItem(e.target.value);
+    const filterTransaction = (search) => {
+      if (!search || search === "") {
+        setFilteredItem(transactions);
+        return;
+      }
+      const filter = transactions.filter((t) =>
+        t.desc.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredItem(filter);
+    };
     filterTransaction(e.target.value);
   };
 
-
-  if (transactions.length === 0) return <p className="ptag">No transaction is added yet! 💬</p>;
+  if (transactions.length === 0)
+    return <p className="ptag">No transaction is added yet! 💬</p>;
 
   return (
     <section>
